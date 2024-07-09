@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,11 +40,11 @@ public class Trip {
     @Column(name = "owner_email", nullable = false)
     private String ownerEmail;
 
-    public Trip(TripRequestPayload data){
+    public Trip(TripRequestPayload data) {
         this.destination = data.destination();
         this.isConfirmed = false;
-        this.ownerName = data.owner_name();
         this.ownerEmail = data.owner_email();
+        this.ownerName = data.owner_name();
         this.startsAt = LocalDateTime.parse(data.starts_at(), DateTimeFormatter.ISO_DATE_TIME);
         this.endsAt = LocalDateTime.parse(data.ends_at(), DateTimeFormatter.ISO_DATE_TIME);
     }
@@ -54,5 +55,42 @@ public class Trip {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public void setEndsAt(LocalDateTime endsAt) {
+        this.endsAt = endsAt;
+    }
+
+    public LocalDateTime getEndsAt() {
+        return endsAt;
+    }
+
+    public void setStartsAt(LocalDateTime startsAt) {
+        this.startsAt = startsAt;
+    }
+
+    public LocalDateTime getStartsAt() {
+        return startsAt;
+    }
+
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setIsConfirmed(boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
+    }
+
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    public boolean getIsConfirmed() {
+        return isConfirmed;
     }
 }
